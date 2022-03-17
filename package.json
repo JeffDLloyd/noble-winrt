@@ -1,6 +1,6 @@
 {
   "name": "@jefflloyd/noble-winrt",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "WinRT bindings for Noble (using BLEServer.exe)",
   "main": "index.js",
   "repository": "https://github.com/urish/noble-winrt",
@@ -9,7 +9,7 @@
   "dependencies": {
     "chrome-native-messaging": "^0.2.0",
     "debug": "^2.6.8",
-    "@jefflloyd/noble": "*"
+    "@jefflloyd/noble": "latest"
   },
   "engines": {
     "node": ">=6.4.0"
