@@ -7,8 +7,16 @@ const nativeMessage = require('chrome-native-messaging');
 const events = require('events');
 const debug = require('debug')('noble-winrt');
 const path = require('path');
+const fs = require('fs');
 
-const BLE_SERVER_EXE = path.resolve(__dirname, 'prebuilt', 'BLEServer.exe');
+// Electron extra resource path
+let BLE_SERVER_EXE = path.join(process.resourcesPath, 'BLEServer.exe')
+
+// Dev path
+if (!fs.existsSync(path)) {
+    BLE_SERVER_EXE = path.resolve(__dirname, 'prebuilt', 'BLEServer.exe')
+}
+
 
 function toWindowsUuid(uuid) {
     return '{' + uuid + '}';
@@ -139,6 +147,7 @@ class WinrtBindings extends events.EventEmitter {
     }
 
     _processMessage(message) {
+        console.log('RECEIVED: ', message)
         debug('in:', message);
         switch (message._type) {
             case 'Start':
@@ -191,6 +200,7 @@ class WinrtBindings extends events.EventEmitter {
     }
 
     _sendMessage(message) {
+        console.log('SEND: ', message)
         debug('out:', message);
         const dataBuf = Buffer.from(JSON.stringify(message), 'utf-8');
         const lenBuf = Buffer.alloc(4);
